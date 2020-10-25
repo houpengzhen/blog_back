@@ -19,21 +19,21 @@ public class Result implements Serializable {
 
     // SUCCESS
     public static Result callBackSuccess(Object data){
-        return callBack(Constants.CALL_BACK_SUCCESS_CODE,Constants.CALL_BACK_SUCCESS_CODE,data);
+        return callBack(ErrorCodeConstants.CALL_BACK_SUCCESS_CODE,Constants.CALL_BACK_SUCCESS,data);
     }
 
     // ERROR
     public static Result callBackFail(String msg){
-        return callBack(Constants.CALL_BACK_ERROR_CODE,msg,null);
+        return callBack(ErrorCodeConstants.CALL_BACK_ERROR_CODE,msg,null);
     }
     public static Result callBackFail(String errorCode, String msg){
-        return callBack(Constants.CALL_BACK_ERROR_CODE,msg,null);
+        return callBack(ErrorCodeConstants.CALL_BACK_ERROR_CODE,msg,null);
     }
 
     // main Funciotn
-    public static Result callBack(String errorCode, String msg, Object data){
+    public static Result callBack(String code, String msg, Object data){
         Result result = new Result();
-        result.setCode(errorCode);
+        result.setCode(code);
         result.setMsg(msg);
         result.setData(data);
         return result;

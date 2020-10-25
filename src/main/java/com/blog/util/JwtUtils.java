@@ -3,8 +3,10 @@ package com.blog.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import sun.awt.SunHints;
 
 import java.util.Date;
 
@@ -12,11 +14,14 @@ import java.util.Date;
 @ConfigurationProperties(prefix = "markerhub.jwt")
 public class JwtUtils {
 
+    @Value("${markerhub.jwt.secret:#{null}}")
     private String secret;
+    @Value("${markerhub.jwt.expire:#{null}}")
     private long expire;
-    private String head;
+    @Value("${markerhub.jwt.header:#{null}}")
+    private String header;
 
-    public String generateToken(long userId){
+    public String generateToken(String userId){
         Date nowDate = new Date();
         // token 过期时间
         Date expirDate = new Date(nowDate.getTime() + expire * 1000);

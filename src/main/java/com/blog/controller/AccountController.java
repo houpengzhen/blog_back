@@ -8,8 +8,6 @@ import com.blog.common.lang.Result;
 import com.blog.entity.User;
 import com.blog.service.UserService;
 import com.blog.util.JwtUtils;
-import io.jsonwebtoken.Jwt;
-import org.apache.catalina.security.SecurityUtil;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -37,7 +35,7 @@ public class AccountController {
             return Result.callBackFail("密码不正确");
         }
 
-        String jwtToken = jwtUtils.generateToken(user.getUid());
+        String jwtToken = jwtUtils.generateToken(user.getUid().toString());
         response.setHeader("Authorization",jwtToken);
         response.setHeader("Access-control-Expose-Headers","Authorization");
         // return Result.callBackSuccess(MapUtil.builder().put("id",user.getUid()));

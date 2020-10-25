@@ -38,4 +38,19 @@ public class GlobalExceptionHandler {
         return Result.callBackFail(e.getMessage());
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = NullPointerException.class)
+    public Result handler(NullPointerException e){
+        log.error("NullPointerException：--》", e);
+        return Result.callBackFail(e.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = ArrayIndexOutOfBoundsException.class)
+    public Result handler(ArrayIndexOutOfBoundsException e){
+        log.error("ArrayIndexOutOfBoundsException：--》", e);
+        return Result.callBackFail(e.getMessage());
+    }
+
+
 }
