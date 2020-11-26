@@ -11,6 +11,7 @@ import com.blog.util.JwtUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +32,9 @@ public class AccountController {
         User user = userService.getOne(new QueryWrapper<User>().eq("uaccount", loginDto.getUaccount()));
         Assert.notNull(user,"用户不存在");
 
-        if(user.getUpwd().equals(SecureUtil.md5(loginDto.getUpwd()))){
+        System.out.println(SecureUtil.md5(loginDto.getUpwd()));
+        System.out.println(SecureUtil.md5(user.getUpwd()));
+        if(!SecureUtil.md5(user.getUpwd()).equals(SecureUtil.md5(loginDto.getUpwd()))){
             return Result.callBackFail("密码不正确");
         }
 
@@ -42,7 +45,7 @@ public class AccountController {
         return Result.callBackSuccess(user);
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public Result logout(){
         SecurityUtils.getSubject().logout();
         return Result.callBackSuccess(null);

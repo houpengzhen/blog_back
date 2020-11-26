@@ -2,6 +2,7 @@ package com.blog.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -22,7 +23,9 @@ public class User {
     private String upwd;
     private String uname;
     private String ucode;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createtime;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updatetime;
     private Integer state;
 
